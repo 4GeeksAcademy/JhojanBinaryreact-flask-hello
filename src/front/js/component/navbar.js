@@ -1,19 +1,28 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
+import '../../styles/Nabvarr.css';
 
 export const Navbar = () => {
-	return (
-		<nav className="navbar navbar-light bg-light">
-			<div className="container">
-				<Link to="/">
-					<span className="navbar-brand mb-0 h1">React Boilerplate</span>
-				</Link>
-				<div className="ml-auto">
-					<Link to="/demo">
-						<button className="btn btn-primary">Check the Context in action</button>
-					</Link>
-				</div>
-			</div>
-		</nav>
-	);
+    const navigate = useNavigate();
+
+    const handleLogout = () => {
+        localStorage.removeItem('access_token');
+        navigate('/login');
+    };
+
+    return (
+        <div className="main">
+            <header className="header">
+                <nav className="navbar">
+                    <h2 className="navbar__logo">S A H U</h2>
+                    <ul className="navbar__link">
+                        <NavLink className="link__item" to="/private">Inicio</NavLink>
+                        <NavLink className="link__item" to="/login">Login</NavLink>
+                        <NavLink className="link__item" to="/">Get Started</NavLink>
+                        <button className="link__item" onClick={handleLogout}>Logout</button>
+                    </ul>
+                </nav>
+            </header>
+        </div>
+    );
 };
